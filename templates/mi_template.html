@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+
+{% block title %}
+<title>Template 1</title>
+{% endblock title %}
+
+{% block texto_h1 %}
+Entrega intermedia
+{% endblock texto_h1 %}
+
+
+{% block herencia_num_1 %}
+<p>
+    <ul>
+        {% for objeto in lista_objetos %}
+        <li>{{objeto.nombre}}</li>
+         {% endfor %}
+    </ul>
+</p>
+{% endblock herencia_num_1 %}
+
+
