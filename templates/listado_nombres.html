@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Listado de Nombres</title>
+{% endblock title %}
+
+{% block texto_header %}
+<h1>
+    Listado de Nombres
+</h1>
+{% endblock texto_header %}
+
+
+{% block herencia_num_1 %}
+<p>
+    <a href= {% url 'crear' %}>Crear Nombre</a>
+</p>
+
+<p>
+
+    <form action={% url 'listado_nombres' %}>
+        {{form}}
+        <button>Buscar</button>
+    </form>
+</p>
+
+<p>
+    {% if listado_nombres %}
+    <ul>
+        {% for nombre in listado_nombres %}
+        <li>{{nombre}}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    No existen datos para la busqueda.
+    {% endif %}
+</p>
+{% endblock herencia_num_1 %}

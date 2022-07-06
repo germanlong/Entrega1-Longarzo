@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import render
 
-from .forms import FormUsuario
+from .forms import Busqueda, FormUsuario
 from .models import Blog
 
 # Create your views here.
@@ -22,15 +22,28 @@ def vista_2(request):
                 nombre=data.get("nombre"),
             )
             nombre.save()
+            
+            listado_nombres = Blog.objects.all()
+            form = Busqueda()
+            
+            return render(request, "listado_nombres.html", {"listado_nombres" : listado_nombres, "form":form})
+        
+        else: 
+            return render(request, "formulario.html", {"form": form})
     
     form_usuario = FormUsuario()
     
     return render(request, "formulario.html", {"form": form_usuario})
 
 
-#print(request.GET)
+def listado_nombres(request):
     
-    #nombre = request.GET.get("nombre")
+    nombre_de_busqueda = request.GET.get("nombre")
     
-    #nombre = Blog(nombre=request.GET.get("nombre"))
-    #nombre.save()
+    if nombre_de_busqueda:
+        listado_nombres = Blog.objects.filter(nombre__icontains=nombre_de_busqueda)
+    else:
+        listado_nombres = Blog.objects.all()
+        
+    form = Busqueda()
+    return render(request, "listado_nombres.html", {"listado_nombres" : listado_nombres, "form" : form})
