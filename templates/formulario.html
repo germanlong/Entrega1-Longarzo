@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Crear</title>
+{% endblock title %}
+
+{% block texto_header %}
+<h1>
+    Crear datos
+</h1>
+{% endblock texto_header %}
+
+
+{% block herencia_num_1 %}
+<p>
+    <form action={% url 'crear' %} method="post">
+        {% csrf_token %}
+        <table>
+            {{form.as_table}}
+        </table>
+        <button>Crear</button>
+    </form>
+</p>
+{% endblock herencia_num_1 %}
